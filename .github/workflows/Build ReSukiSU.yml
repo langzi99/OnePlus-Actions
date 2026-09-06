@@ -668,6 +668,12 @@ jobs:
             export PATH="/usr/lib/ccache:$PATH"
             sudo apt install libelf-dev
             cd kernel_workspace/kernel_platform/common
+            echo "=== DEBUG TOOLCHAIN ==="
+            ls -la ../prebuilts/clang/host/linux-x86/ 2>/dev/null || echo "NO prebuilts/clang DIR"
+            ls ../prebuilts/clang/host/linux-x86/clang-r416183b/bin/ 2>/dev/null | head -20 || echo "NO clang-r416183b"
+            which ld.lld || echo "ld.lld NOT in PATH"
+            echo "PATH=$PATH"
+            echo "=== DEBUG END ==="
             make -j$(nproc --all) LLVM_IAS=1 LLVM=1 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CC="ccache clang" RUSTC=../../prebuilts/rust/linux-x86/1.73.0b/bin/rustc PAHOLE=../../prebuilts/kernel-build-tools/linux-x86/bin/pahole LD=ld.lld HOSTLD=ld.lld O=out gki_defconfig all
           fi
           
