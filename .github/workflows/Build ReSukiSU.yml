@@ -1,4 +1,4 @@
-uild ReSukiSU
+name: Build ReSukiSU
 on:
   workflow_dispatch:
     inputs:
